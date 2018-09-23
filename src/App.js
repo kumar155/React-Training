@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import logo from './logo.svg';
 import './App.css';
 import FunctionalComponent, {FunctionalComponent2} from './functionalcomponent';
@@ -45,11 +46,26 @@ class App extends Component {
         <FunctionalComponent/>
         <ClassComponent name={'something new data..'} userName={this.state.userName}/>
         <p>{this.state.name} & value is: {this.state.value}</p>
+       test: {this.props.propName}
+       {this.props.propFunction('testing name........')}
+       {this.props.children}
       </div>
     );
   }
   getOustSideFunction = () => {
     return 'World';
+  }
+}
+
+App.propTypes = {
+  propName : PropTypes.string.isRequired,
+  propFunction: PropTypes.func.isRequired,
+}
+
+App.defaultProps = {
+  propName: 'testing name',
+  propFunction: (name) => {
+    return name;
   }
 }
 
