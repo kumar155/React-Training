@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import logo from './logo.svg';
 import './App.css';
-import { simpleAction } from './actions/SimpleAction';
+import { simpleAction, IncrementNumberAction, DecrementCountAction } from
+ './actions/SimpleAction';
 
 class App extends Component {  
  render() {
@@ -18,25 +19,45 @@ class App extends Component {
      <button onClick={this.simpleAction}>Test redux action</button>
       <pre>
         {
-          JSON.stringify(this.props)
+          JSON.stringify(this.props.data)
         }
       </pre>
+      <br/>
+      <br/>
+      <button onClick={this.IncrementNumber}>Increment Count</button>
+      <br/>
+      <br/>
+      Count: {this.props.Ic}
+      <br/>
+      <br/>
+      <button onClick={this.DecrementCount}>Decrement Count</button>
+      <br/>
+      <br/>
+      Count: {this.props.Dc}
    </div>
   );
  }
   simpleAction = () => {
     this.props.simpleAction();
   };
+  IncrementNumber = () => {
+    this.props.IncrementNumberAction(this.props.Ic);
+  }
+  DecrementCount = () => {
+    this.props.DecrementCountAction();
+  }
 }
 
-
-
 const mapStateToProps = state => ({
-  ...state
+  Ic: state.incrementCountReducer,
+  Dc: state.decrementCountReducer,
+  data: state.simpleReducer,
  });
 
  const mapDispatchToProps = dispatch => ({
-  simpleAction: () => dispatch(simpleAction())
+  simpleAction: () => dispatch(simpleAction()),
+  IncrementNumberAction: (value) => dispatch(IncrementNumberAction(value)),
+  DecrementCountAction: () => dispatch(DecrementCountAction())
  });
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+ export default connect(mapStateToProps, mapDispatchToProps)(App);

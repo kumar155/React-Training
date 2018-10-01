@@ -1,13 +1,15 @@
-export const SIMPLE_ACTION = 'actions/SimpleAction/SIMPLE_ACTION';
-
-export const INCREMENT_NUMBER = 'actions/simpleAction/INCREMENT_NUMBER';
+import * as actionConstants from './actionTypes';
 
 export const simpleAction = () => ({
-     type: SIMPLE_ACTION,
+     type: actionConstants.SIMPLE_ACTION,
      payload: 'result_of_simple_action'
 });
 
-export const incrementCountAction = (prevCount) => ({
-    type: INCREMENT_NUMBER,
-    payload: prevCount,
+export const IncrementNumberAction = (count) => ({
+    type: actionConstants.INCREMENT_NUMBER,
+    payload: count,
 });
+
+export const DecrementCountAction = () => ({
+    type: actionConstants.DECREMENT_COUNT,
+})
